@@ -8,19 +8,19 @@ The Lessons have everything that was included in the lesson, including all the s
 
 For example:
 
-//STEP 1, 2, 3
-/*
-someCode();
-*/
+    //STEP 1, 2, 3
+    /*
+    someCode();
+    */
 
 means that you should have that block uncommented during steps 1, 2, and 3, but once you go to step 4 you want to comment it out.
 
 To uncomment code (make it work, for when you're on that step), you want to comment the /* and the */. That's not very intuitive, I know. You do that but adding a "//" like this:
 
-//STEP 1, 2, 3
-///*
-someCode();
-//*/
+    //STEP 1, 2, 3
+    ///*
+    someCode();
+    //*/
 
 This causes someCode() to be called. You'll notice in your text editor that it's grayed out when it's a comment.
 
@@ -28,10 +28,10 @@ To recomment the code out again, just remove those //'s you added.
 
 Some steps might say,
 
-//STEP 5+
-/*
-someOtherCode();
-*/
+    //STEP 5+
+    /*
+    someOtherCode();
+    */
 
 This means that as long as you're on step 5 or later, keep that code uncommented.
 
