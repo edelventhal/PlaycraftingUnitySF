@@ -9,10 +9,23 @@ public class Controller : MonoBehaviour
     
     public void Update()
     {
-        //now, move only when we press the right arrow on the keyboard
+        //we do the same thing for every direction. The directions are determined by
+        //the same way a graph in math works - really Unity's scene is one big graph.
         if ( Input.GetKey( KeyCode.RightArrow ) )
         {
             controlledMover.MoveInDirection(new Vector2(1.0f, 0.0f));
+        }
+        if ( Input.GetKey( KeyCode.LeftArrow ) )
+        {
+            controlledMover.MoveInDirection(new Vector2(-1.0f, 0.0f));
+        }
+        if ( Input.GetKey( KeyCode.UpArrow ) )
+        {
+            controlledMover.MoveInDirection(new Vector2(0.0f, 1.0f));
+        }
+        if ( Input.GetKey( KeyCode.DownArrow ) )
+        {
+            controlledMover.MoveInDirection(new Vector2(0.0f, -1.0f));
         }
     }
 }
