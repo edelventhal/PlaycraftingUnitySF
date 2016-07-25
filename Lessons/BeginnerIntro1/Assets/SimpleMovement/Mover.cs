@@ -4,8 +4,9 @@ using System.Collections;
 //a Mover is a component that can change its position in the unity scene
 public class Mover : MonoBehaviour
 {
-    //how fast do we move? This is a "float" because it's a floating point number (has decimals)
-    public float speed;
+    //how fast do we move, on both the X and Y axis? A "Vector2" is the same as 2 float's, one
+    //for the x and one for the y.
+    public Vector2 velocity;
     
     // Use this for initialization
     public void Start ()
@@ -16,8 +17,8 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     public void Update ()
     {
-        //use the speed value we declared at the top to change how much we move by.
-        //this lets us change the value in the editor to adjust the speed
-        transform.position += new Vector3( speed * Time.deltaTime, 0.0f, 0.0f );
+        //so that we can change both the X and the Y positions (and to use more realistic movement)
+        //we're going to use a velocity vector to adjust the position. Remember Time.deltaTime!
+        transform.position += (Vector3) velocity * Time.deltaTime;
     }
 }
