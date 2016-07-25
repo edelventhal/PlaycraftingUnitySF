@@ -9,9 +9,10 @@ public class Controller : MonoBehaviour
     
     public void Update()
     {
-        //we are calling the MoveInDirection function on our controlledMover, telling it to move to the right.
-        //notice how the Mover itself handles how fast it moves, the Controller only changes the direction.
-        //this is called "encapsulation" – keep logic in relevant places that makes sense and don't let others mess with it.
-        controlledMover.MoveInDirection(new Vector2(1.0f, 0.0f));
+        //now, move only when we press the right arrow on the keyboard
+        if ( Input.GetKey( KeyCode.RightArrow ) )
+        {
+            controlledMover.MoveInDirection(new Vector2(1.0f, 0.0f));
+        }
     }
 }
