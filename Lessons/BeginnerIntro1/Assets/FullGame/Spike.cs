@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //a spike causes you to the lose the game when you touch it
 public class Spike : MonoBehaviour
@@ -12,8 +13,8 @@ public class Spike : MonoBehaviour
         //it's possible that we don't have any PhysicsMover at all, like if we hit something else
         if ( hitMover != null )
         {
-            //this destroys a Unity object, removing it from the scene.
-            Destroy( hitMover.gameObject );
+            //this is even better - let's load another scene when we die, so we can show a game over screen.
+            SceneManager.LoadScene( "GameOver" );
         }
     }
 }
