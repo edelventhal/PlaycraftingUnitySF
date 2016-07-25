@@ -7,8 +7,10 @@ public class Mover : MonoBehaviour
     //how fast do we move at maximum?
     public float speed = 1.0f;
     
-    //what is our current movement velocity? This is "private" so that we don't expose it in the editor.
-    //that's because we only want to change it with MoveInDirection.
+    //how much friction do we apply each frame? The higher, the faster we come to a stop.
+    public float friction = 4.0f;
+    
+    //what is our current movement velocity?
     private Vector2 velocity;
     
     // Use this for initialization
@@ -20,8 +22,10 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     public void Update ()
     {
-        //so that we can change both the X and the Y positions (and to use more realistic movement)
-        //we're going to use a velocity vector to adjust the position. Remember Time.deltaTime!
+        //let's add in friction - by reducing the velocity each frame, we know it will
+        //eventually come to a stop. We use 1.0f - friction because we want the speed
+        //to DECREASE as friction INCREASES.
+        velocity *= 1.0f - friction * Time.deltaTime;
         transform.position += (Vector3) velocity * Time.deltaTime;
     }
     
