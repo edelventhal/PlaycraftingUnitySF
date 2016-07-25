@@ -4,6 +4,9 @@ using System.Collections;
 //a Mover is a component that can change its position in the unity scene
 public class Mover : MonoBehaviour
 {
+    //how fast do we move? This is a "float" because it's a floating point number (has decimals)
+    public float speed;
+    
     // Use this for initialization
     public void Start ()
     {
@@ -13,10 +16,8 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     public void Update ()
     {
-        //since each frame may take up different amounts of time, multiply by Time.deltaTime
-        //in order to ensure smooth movement (uniform movement regardless of how long a frame takes)
-        //Time.deltaTime is a measure of how long the last frame took in seconds. It will typically
-        //be a very small value, somewhere near 1 / 60 (since you have 60 frames a second).
-        transform.position += new Vector3( 1.0f * Time.deltaTime, 0.0f, 0.0f );
+        //use the speed value we declared at the top to change how much we move by.
+        //this lets us change the value in the editor to adjust the speed
+        transform.position += new Vector3( speed * Time.deltaTime, 0.0f, 0.0f );
     }
 }
