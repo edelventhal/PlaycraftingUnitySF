@@ -9,22 +9,18 @@ public class PhysicsController : MonoBehaviour
     
     public void Update()
     {
-        //this is totally the same as the Controller code!
         if ( Input.GetKey( KeyCode.RightArrow ) )
         {
-            controlledMover.AccelerateInDirection(new Vector2(1.0f, 0.0f));
+            controlledMover.AccelerateInDirection(new Vector3(1.0f, 0.0f));
         }
         if ( Input.GetKey( KeyCode.LeftArrow ) )
         {
-            controlledMover.AccelerateInDirection(new Vector2(-1.0f, 0.0f));
+            controlledMover.AccelerateInDirection(new Vector3(-1.0f, 0.0f));
         }
-        if ( Input.GetKey( KeyCode.UpArrow ) )
+        //instead of being able to move up and down, let's make it so that we use the space bar to jump!
+        if ( Input.GetKey( KeyCode.Space ) )
         {
-            controlledMover.AccelerateInDirection(new Vector2(0.0f, 1.0f));
-        }
-        if ( Input.GetKey( KeyCode.DownArrow ) )
-        {
-            controlledMover.AccelerateInDirection(new Vector2(0.0f, -1.0f));
+            controlledMover.Jump();
         }
     }
 }
