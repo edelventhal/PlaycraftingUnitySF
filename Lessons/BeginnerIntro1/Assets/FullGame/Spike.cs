@@ -12,8 +12,8 @@ public class Spike : MonoBehaviour
         //it's possible that we don't have any PhysicsMover at all, like if we hit something else
         if ( hitMover != null )
         {
-            //this will print some text to the console. this can be very useful for seeing what happens.
-            Debug.Log( "The player died!" );
+            //this destroys a Unity object, removing it from the scene.
+            Destroy( hitMover.gameObject );
         }
     }
 }
