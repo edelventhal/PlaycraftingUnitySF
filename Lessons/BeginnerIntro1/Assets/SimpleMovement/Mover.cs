@@ -35,4 +35,11 @@ public class Mover : MonoBehaviour
     {
         velocity = direction * speed;
     }
+    
+    //instead of instantaneously moving us in a direction, this function ADDS to
+    //the velocity, which means it only adjusts it, allowing us smoothness.
+    public void AddSpeedInDirection(Vector2 direction)
+    {
+        velocity += direction * speed * Time.deltaTime;
+    }
 }

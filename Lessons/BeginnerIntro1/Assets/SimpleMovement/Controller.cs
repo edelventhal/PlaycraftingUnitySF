@@ -9,23 +9,22 @@ public class Controller : MonoBehaviour
     
     public void Update()
     {
-        //we do the same thing for every direction. The directions are determined by
-        //the same way a graph in math works - really Unity's scene is one big graph.
+        //instead of immediately setting the position, let's change it over time
         if ( Input.GetKey( KeyCode.RightArrow ) )
         {
-            controlledMover.MoveInDirection(new Vector2(1.0f, 0.0f));
+            controlledMover.AddSpeedInDirection(new Vector2(1.0f, 0.0f));
         }
         if ( Input.GetKey( KeyCode.LeftArrow ) )
         {
-            controlledMover.MoveInDirection(new Vector2(-1.0f, 0.0f));
+            controlledMover.AddSpeedInDirection(new Vector2(-1.0f, 0.0f));
         }
         if ( Input.GetKey( KeyCode.UpArrow ) )
         {
-            controlledMover.MoveInDirection(new Vector2(0.0f, 1.0f));
+            controlledMover.AddSpeedInDirection(new Vector2(0.0f, 1.0f));
         }
         if ( Input.GetKey( KeyCode.DownArrow ) )
         {
-            controlledMover.MoveInDirection(new Vector2(0.0f, -1.0f));
+            controlledMover.AddSpeedInDirection(new Vector2(0.0f, -1.0f));
         }
     }
 }
