@@ -6,7 +6,7 @@ public class Destructible : MonoBehaviour
     
     public void ModifyHitPoints( float amount )
     {
-        hitPoints -= amount;
+        hitPoints += amount;
         
         if ( hitPoints <= 0.0f )
         {
