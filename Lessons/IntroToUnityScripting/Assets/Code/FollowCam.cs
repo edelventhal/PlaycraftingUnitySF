@@ -8,7 +8,7 @@ public class FollowCam : MonoBehaviour
     
     protected Vector3 velocity;
     
-    public void Update()
+    public void LateUpdate()
     {
         if ( target != null )
         {
