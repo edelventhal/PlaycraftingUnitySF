@@ -15,6 +15,16 @@ public class DamagingCollider : MonoBehaviour
         DoCollision( collider );
     }
     
+    public void OnCollisionEnter2D( Collision2D collision )
+    {
+        DoCollision( collision.collider );
+    }
+    
+    public void OnCollisionStay2D( Collision2D collision )
+    {
+        DoCollision( collision.collider );
+    }
+    
     public void DoCollision( Collider2D collider )
     {
         Destructible destructible = collider.GetComponent<Destructible>();
