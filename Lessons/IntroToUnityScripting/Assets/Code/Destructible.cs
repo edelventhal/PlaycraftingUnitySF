@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
-    public void Awake()
+    public float hitPoints = 100.0f;
+    
+    public void ModifyHitPoints( float amount )
     {
-        //everything here will happen IMMEDIATELY when the object is loaded or instantiated
+        hitPoints -= amount;
+        
+        if ( hitPoints <= 0.0f )
+        {
+            Die();
+        }
     }
     
-    public void Start()
+    public void Die()
     {
-        //everything here will happen on the first frame update
-    }
-    
-    public void Update()
-    {
-        //everything here will happen every frame
+        Object.Destroy( gameObject );
     }
 }
