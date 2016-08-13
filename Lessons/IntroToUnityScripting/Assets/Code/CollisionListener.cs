@@ -1,10 +1,8 @@
 using UnityEngine;
 
-//hurts Destructibles on collisions
-public class DamagingCollider : MonoBehaviour
+//when a collision happens, sends messages to any attached CollisionHandlers
+public class CollisionListener : MonoBehaviour
 {
-    public float damage = 10.0f;
-    
     public void OnTriggerEnter2D( Collider2D collider )
     {
         DoCollision( collider );
@@ -27,10 +25,9 @@ public class DamagingCollider : MonoBehaviour
     
     public void DoCollision( Collider2D collider )
     {
-        Destructible destructible = collider.GetComponent<Destructible>();
-        if ( destructible != null )
-        {
-            destructible.ModifyHitPoints( damage * -1.0f );
-        }
+        //this is a useful feature you can do in Unity – it will call any functions named "HandleCollision"
+        //that exist on any MonoBehaviour's that are also attached to this GameObject.
+        //As a warning – this is a bit inefficient. There are faster but less convenient ways to do this.
+        SendMessage( "HandleCollision", collider );
     }
 }
