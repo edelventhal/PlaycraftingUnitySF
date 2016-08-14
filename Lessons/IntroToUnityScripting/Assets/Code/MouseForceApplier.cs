@@ -11,14 +11,17 @@ public class MouseForceApplier : MonoBehaviour
     //remember, physics will be applied from here, so we'll use FixedUpdate
     public void FixedUpdate()
     {
-        if ( Input.GetMouseButton( 0 ) )
+        if ( target != null )
         {
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-            Vector2 forceDirection = ( (Vector2) ( mouseWorldPos - target.transform.position ) ).normalized;
-            Vector2 forceAmount = Vector2.Scale( appliedForce, forceDirection );
+            if ( Input.GetMouseButton( 0 ) )
+            {
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+                Vector2 forceDirection = ( (Vector2) ( mouseWorldPos - target.transform.position ) ).normalized;
+                Vector2 forceAmount = Vector2.Scale( appliedForce, forceDirection );
             
-            //we must multiply by fixedDeltaTime since this is being applied every frame
-            target.AddForce( forceAmount * target.mass * Time.fixedDeltaTime );
+                //we must multiply by fixedDeltaTime since this is being applied every frame
+                target.AddForce( forceAmount * target.mass * Time.fixedDeltaTime );
+            }
         }
     }
 }
