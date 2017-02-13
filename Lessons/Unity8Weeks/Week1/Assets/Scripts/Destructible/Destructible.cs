@@ -8,9 +8,6 @@ public class Destructible : MonoBehaviour
 {
     public float maximumHitPoints = 100.0f;
     public float invincibilityTime = 0.5f;
-    
-    public AudioClip[] hurtSounds;
-    public AudioClip[] deathSounds;
 
     protected float lastTimeHurt;
     
@@ -57,13 +54,7 @@ public class Destructible : MonoBehaviour
         
         if ( hitPoints <= 0.0f )
         {
-            //the Sounds functions are not built-in Unity... see Sounds.cs
-            Sounds.Play( deathSounds );
             Die();
-        }
-        else if ( amount < 0.0f )
-        {
-            Sounds.Play( hurtSounds );
         }
     }
 
