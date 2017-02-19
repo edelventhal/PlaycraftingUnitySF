@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
         //bonus! this works with WASD and we can hook it up to work with controllers!
         controlledMover.AccelerateInDirection( new Vector3( Input.GetAxis( "Horizontal" ), 0.0f, 0.0f ) );
 
-        if ( Input.GetButtonDown( "Jump" ) )
+        if ( Input.GetKeyDown( KeyCode.Space ) )
         {
             controlledJumper.Jump();
         }
