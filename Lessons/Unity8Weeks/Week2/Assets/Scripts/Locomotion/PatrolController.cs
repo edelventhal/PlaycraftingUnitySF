@@ -13,6 +13,9 @@ public class PatrolController : MonoBehaviour
     [Tooltip ("How long we will patrol in each direction before turning around.")]
     public float patrolTime = 1.0f;
 
+    [Tooltip ("If this is true, then the controller will flip the Mover around if it reaches an edge.")]
+    public bool looksAhead = true;
+
     [Tooltip ("How far we look ahead for the ledge if we want to turn around.")]
     public float lookAheadDistance = 0.5f;
 
@@ -27,7 +30,6 @@ public class PatrolController : MonoBehaviour
         remainingPatrolTime = patrolTime;
         movementDirection = 1.0f;
     }
-
 
     public void Update()
     {
@@ -55,6 +57,12 @@ public class PatrolController : MonoBehaviour
 
     protected bool MovingForwardsIsSafe()
     {
+        //if this thing doesn't look ahead, then it's always safe!
+        if ( !looksAhead )
+        {
+            return true;
+        }
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
         //if we're not going anywhere, it's totally safe to move forwards
