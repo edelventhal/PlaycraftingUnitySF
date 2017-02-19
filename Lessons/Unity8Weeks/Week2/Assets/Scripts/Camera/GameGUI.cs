@@ -79,7 +79,7 @@ public class GameGUI : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene( "MainGame" );
+        SceneManager.LoadScene( SceneManager.GetActiveScene().name );
     }
 
     protected void UpdateUI( bool force )

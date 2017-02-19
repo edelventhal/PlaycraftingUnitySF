@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-//this is a simple controller that will tell a Mover to
+//this is a simple controller that will tell a Jumper to
 //jump periodically.
 public class JumpController : MonoBehaviour
 {
