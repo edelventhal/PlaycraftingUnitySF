@@ -79,6 +79,6 @@ public class PatrolController : MonoBehaviour
         //it is is ONLY direction, and always has a length (magnitude) of 1.
         GroundDetector groundDetector = controlledMover.GetComponent<GroundDetector>();
         return Physics2D.Raycast( (Vector2) ( transform.position + lookAheadDistance * transform.right * directionNormal ) + groundDetector.colliderCenter,
-                                  Vector2.down, groundDetector.collisionRadiusY + 0.1f, groundDetector.onGroundLayerMask );
+                                  Vector2.down, groundDetector.collisionRadiusY + 0.1f, groundDetector.onGroundLayerMask ).collider != null;
     }
 }

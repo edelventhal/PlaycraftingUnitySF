@@ -14,7 +14,7 @@ public class SpriteVelocityFlipper : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
         //do nothing if we're not moving - stick with the facing we have
-        if ( rb.velocity.x == 0.0f )
+        if ( Mathf.Abs( rb.velocity.x ) <= 0.01f )
         {
             return;
         }
