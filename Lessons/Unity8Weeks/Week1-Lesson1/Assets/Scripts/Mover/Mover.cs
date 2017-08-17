@@ -24,15 +24,6 @@ public class Mover : MonoBehaviour
         rb.velocity = newVelocity;
     }
 
-    public void Update() 
-    {
-        Animator animator = GetComponent<Animator>();
-        if ( animator != null )
-        {
-            animator.SetBool( "walking", IsWalking() );
-        }
-    }
-
     //this is convenient for controllers to know. we're walking if we have any x velocity.
     public bool IsWalking()
     {
