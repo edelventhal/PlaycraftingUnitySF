@@ -1,6 +1,7 @@
 using UnityEngine;
 
-//a PhysicsMover is just like a Mover except it uses Unity's built-in physics to move
+//a Mover is something that can move around along the X axis.
+[RequireComponent(typeof(GroundDetector))]
 public class Mover : MonoBehaviour
 {
     [Tooltip ("How much we accelerate over time on the ground. the higher it is, the fast we gain speed.")]
@@ -9,32 +10,27 @@ public class Mover : MonoBehaviour
     [Tooltip ("How much we accelerate when we're in the air.")]
     public float aerialAcceleration = 10.0f;
     
-    [Tooltip ("How much force we apply when we jump into the air. the higher it is, the higher we jump.")]
-    public float jumpImpulse = 10.0f;
-    
     [Tooltip ("How fast we can go at the very maximum.")]
     public float maximumSpeed = 20.0f;
 
     [Tooltip ("When our X velocity is lower than this, we are standing. This is mostly for aesthetic reasons like animations.")]
     public float minimumWalkSpeed = 0.1f;
-
-    //we need to track whether we're on the ground or not to allow jumping. a "bool" is a boolean
-    //value - true or false. So this will either be yes or no to whether we are on the ground.
-    private bool isOnGround;
     
-    //this is Mover has an Animator attached, we can play animations as we go.
-    private Animator animator;
+    //if this Mover has an Animator attached, we can play animations as we go.
+    protected Animator animator;
+
+    //this is the GroundDetector that we use to tell whether we're on the ground or not 
+    protected GroundDetector groundDetector;
 
     //we need to initialize isOnGround to be false, since we start in the air.
     public void Start()
     {
-        isOnGround = false;
         animator = GetComponent<Animator>();
+        groundDetector = GetComponent<GroundDetector>();
     }
 
     public void Update()
     {
-        //if we have an Animator, tell it how to animate
         if ( animator != null )
         {
             //tell the animator if we're walking or not
@@ -47,7 +43,7 @@ public class Mover : MonoBehaviour
     public void AccelerateInDirection(Vector2 direction)
     {
         float accel = acceleration;
-        if ( !isOnGround )
+        if ( !groundDetector.isOnGround )
         {
             accel = aerialAcceleration;
         }
@@ -57,62 +53,6 @@ public class Mover : MonoBehaviour
         Vector3 newVelocity = rb.velocity + direction * accel * Time.deltaTime;
         newVelocity.x = Mathf.Clamp( newVelocity.x, -maximumSpeed, maximumSpeed );
         rb.velocity = newVelocity;
-    }
-    
-    //applies a single burst of velocity upwards - jump!
-    public void Jump()
-    {
-        //only apply the velocity if we're currently standing on the ground
-        if ( isOnGround )
-        {
-            GetComponent<Rigidbody2D>().velocity += new Vector2( 0.0f, jumpImpulse );
-    
-            //tell our animator to play a jump animation
-            if ( animator != null )
-            {
-                animator.SetBool( "jumping", true );
-            }
-
-            //since we've just jumped, we're no longer on the ground
-            isOnGround = false;
-        }
-    }
-    
-    //Unity will automatically call this on a MonoBehaviour on the frame that a collision starts
-    //between 2 colliders. note that occasionally this doesn't get called - thanks Unity!
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        //we collided, so that means we're on the ground
-        //note that this is a pretty poor way of doing it, since if we hit our head it would also mean we had
-        //jumped... maybe you'd fix that by checking collision.normal?
-        //this also doesn't work well when we collide with multiple objects, and can fully break.
-        //how might we handle multiple collisions? Maybe a list?
-        if ( collision.collider.gameObject.layer == 8 )
-        {
-            isOnGround = true;
-
-            //tell our animator to play a jump animation
-            if ( animator != null )
-            {
-                animator.SetBool( "jumping", false );
-            }
-        }
-    }
-    
-    //Unity will automatically call this on a MonoBehaviour on the frame that a collision ends
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        //we're not colliding anymore, so we're no longer standing on the ground
-        if ( collision.collider.gameObject.layer == 8 )
-        {
-            isOnGround = false;
-
-            //tell our animator to play a jump animation
-            if ( animator != null )
-            {
-                animator.SetBool( "jumping", true );
-            }
-        }
     }
 
     //this is convenient for controllers to know. we're walking if we have any x velocity.

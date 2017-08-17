@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-//this is a simple controller that will tell a Mover to
+//this is a simple controller that will tell a Jumper to
 //jump periodically.
 public class JumpController : MonoBehaviour
 {
-    public Mover controlledMover;
+    public Jumper controlledJumper;
 
     public float jumpDelay = 1.0f;
 
@@ -20,7 +20,7 @@ public class JumpController : MonoBehaviour
     {
         if ( Time.time >= nextJumpTime )
         {
-            controlledMover.Jump();
+            controlledJumper.Jump();
 
             nextJumpTime = Time.time + jumpDelay;
         }

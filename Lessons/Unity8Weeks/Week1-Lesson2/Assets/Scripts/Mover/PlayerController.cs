@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //this is the PhysicsMover that we control
     public Mover controlledMover;
+    public Jumper controlledJumper;
     
     public void Update()
     {
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
         if ( Input.GetKey( KeyCode.Space ) )
         {
-            controlledMover.Jump();
+            controlledJumper.Jump();
         }
     }
 }
