@@ -3,11 +3,22 @@ using UnityEngine.UI;
 
 public class TalkyText : MonoBehaviour
 {
+    [Tooltip("How may letters appear each second - changes text reveal speed.")]
     public float lettersPerSecond = 50.0f;
+    
+    [Tooltip("The first sound that is played when the dialog begins.")]
     public AudioClip initialSound;
+    
+    [Tooltip("The sound that is looped while the dialog is played, after the initialSound.")]
     public AudioClip talkySound;
+    
+    [Tooltip("An optional delay before actually doing the Talky on start. If negative, plays immediately.")]
     public float talkyDelay = -1.0f;
+    
+    [Tooltip("If startsBlank is true, the text will be cleared on start. You'll need to call SetText() to change it.")]
     public bool startsBlank = false;
+    
+    [Tooltip("The minimum time in seconds between playing the initialSound. Good for user-activated talking.")]
     public float minTimeBetweenTalkSounds = -1.0f;
     
     protected bool shouldModifyText;
@@ -37,14 +48,7 @@ public class TalkyText : MonoBehaviour
             initialText = textMesh.text;
         }
         
-        if ( textGUI != null )
-        {
-            textGUI.text = "";
-        }
-        else
-        {
-            textMesh.text = "";
-        }
+        DoSetText( "" );
         
         if ( !startsBlank )
         {
@@ -125,11 +129,9 @@ public class TalkyText : MonoBehaviour
         
         shouldModifyText = true;
         modifyTextStartTime = Time.time;
-        if ( textMesh != null )
-        {
-            targetText = textMesh.text;
-        }
-        else if ( textGUI != null )
+        
+        //calculates the line wrapping for us
+        if ( textGUI != null )
         {
             targetText = text;
         }

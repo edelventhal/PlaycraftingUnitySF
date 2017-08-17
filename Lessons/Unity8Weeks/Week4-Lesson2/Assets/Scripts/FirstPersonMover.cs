@@ -13,12 +13,19 @@ public class FirstPersonMover : MonoBehaviour
     
     public void Update ()
     {
-        Vector3 delta = new Vector3( Input.GetAxis( "Horizontal" ), 0.0f,  Input.GetAxis( "Vertical" ) );
+        Vector3 delta = transform.forward * Input.GetAxis( "Vertical" ) + transform.right * Input.GetAxis( "Horizontal" );
 
-        if ( delta != Vector3.zero )
+        if ( GetComponent<NavMeshAgent>().enabled )
         {
-            //transform.position += delta * Time.deltaTime * speed;
-            GetComponent<NavMeshAgent>().destination = transform.position + delta;
+            if ( delta != Vector3.zero )
+            {
+                //transform.position += delta * Time.deltaTime * speed;
+                GetComponent<NavMeshAgent>().destination = transform.position + delta;
+            }
+            else 
+            {
+                GetComponent<NavMeshAgent>().destination = transform.position;
+            }
         }
     }
 }

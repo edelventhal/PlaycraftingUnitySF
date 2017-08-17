@@ -28,7 +28,7 @@ public class Jumper : MonoBehaviour
     public void Jump()
     {
         body.isKinematic = false;
-        body.velocity = agent.velocity;
+        body.velocity = agent.velocity * 2;
         agent.enabled = false;
         body.AddForce( Vector3.up * jumpImpulse );
     }

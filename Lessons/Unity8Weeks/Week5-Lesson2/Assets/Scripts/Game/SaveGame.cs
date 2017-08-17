@@ -14,7 +14,7 @@ public class SaveGame : MonoBehaviour
         Load();
     }
     
-    public void OnDestroy()
+    public void Update()
     {
         Save();
     }

@@ -40,6 +40,8 @@ public class FollowCam : MonoBehaviour
             //the "ref" keyword means we are "passing by reference" which is a fancy way of saying that SmoothDamp
             //can modify that exact variable (the "velocity" variable) instead of a copy of it.
             transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity,damping);
+
+            transform.forward = Vector3.Lerp( transform.forward, target.forward, Time.deltaTime * 3.0f );
         }
     }
 }

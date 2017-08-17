@@ -20,9 +20,9 @@ public class ChainRenderer : MonoBehaviour
     public void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.numPositions = Mathf.Max( 2, controlPointCount + 1 );
+        lineRenderer.positionCount = Mathf.Max( 2, controlPointCount + 1 );
 
-        linePoints = new Vector3[ lineRenderer.numPositions ];
+        linePoints = new Vector3[ lineRenderer.positionCount ];
         pointLerpDamping = Mathf.Clamp( pointLerpDamping, 0, 1 );
     }
 

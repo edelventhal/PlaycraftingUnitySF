@@ -6,6 +6,10 @@ public class NavMeshPatroller : MonoBehaviour
 {
     public Transform[] patrolPoints;
 
+    public float reachedPointDistance = 1.0f;
+
+    public float giveUpDistance = 50.0f;
+
     protected int pointIndex;
 
     protected NavMeshAgent agent;
@@ -22,14 +26,19 @@ public class NavMeshPatroller : MonoBehaviour
     
     public void Update ()
     {
-        if ( agent.remainingDistance <= 0.0f )
+        if ( agent.remainingDistance <= reachedPointDistance || agent.remainingDistance >= giveUpDistance )
         {
-            PatrolTo( (pointIndex + 1) % patrolPoints.Length );
+            PatrolToNext();
         }
         else
         {
             agent.destination = patrolPoints[pointIndex].position;
         }
+    }
+
+    public void PatrolToNext()
+    {
+        PatrolTo( (pointIndex + 1) % patrolPoints.Length );
     }
 
     public void PatrolTo( int newPointIndex )
