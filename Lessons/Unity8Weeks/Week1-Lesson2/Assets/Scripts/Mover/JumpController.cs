@@ -15,7 +15,6 @@ public class JumpController : MonoBehaviour
         nextJumpTime = 0.0f;
     }
 
-
     public void Update()
     {
         if ( Time.time >= nextJumpTime )
